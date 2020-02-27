@@ -1,0 +1,25 @@
+slack:
+   token: ${SLACK_TOKEN}
+   channel: ${SLACK_CHANNEL}
+   urls:
+      base: https://slack.com/api
+      reactions: ${slack.urls.base}/reactions.get
+      addreactions: ${slack.urls.base}/reactions.add
+      post: ${slack.urls.base}/chat.postMessage
+      user-info: ${slack.urls.base}/users.info
+
+bluealliance:
+   token: ${BLUE_ALLIANCE_TOKEN}
+   base: https://www.thebluealliance.com/api/v3
+   getmatchURL: ${bluealliance.base}/match
+      
+spring:
+   datasource:
+      driverClassName: org.postgresql.Driver
+      url: jdbc:postgresql://local
+      username: postgres
+      password: postgres
+   jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+         ddl-auto: create
