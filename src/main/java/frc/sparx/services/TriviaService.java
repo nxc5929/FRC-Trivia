@@ -73,7 +73,7 @@ public class TriviaService {
 		String matchKey = match.getMatch().getComp_level() + match.getMatch().getMatch_number();
 		String currentMathKey = match.getEvent_key() + "_" + matchKey;
 		TriviaQuestion question = triviaRepo.findQuestionByMatchKey(currentMathKey);
-		if(question != null && question.getTimestamp() == null && match.getMatch().getScore_breakdown() != null) {
+		if(question != null && question.getTimestamp() != null && match.getMatch().getScore_breakdown() != null) {
 			Trivia triviaQuestion = getTrivia(question.getTriviaNumber());
 			TriviaResponse result = triviaQuestion.getResult(match.getMatch().getScore_breakdown());
 			slack.sendMessage(matchKey + " RESULT: " + result.getMessage());
