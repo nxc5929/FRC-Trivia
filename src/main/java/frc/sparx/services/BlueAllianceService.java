@@ -32,6 +32,7 @@ public class BlueAllianceService {
 			request = RequestEntity
 					.get(new URI(matchURL + "/" + matchKey))
 					.header("X-TBA-Auth-Key", token)
+					.header("User-Agent", "Heroku Trivia App")
 					.build();
 		} catch (URISyntaxException e) {
 			e.printStackTrace();

@@ -17,7 +17,6 @@ import frc.sparx.bluealliance.events.BaseEvent;
 import frc.sparx.bluealliance.events.Event;
 import frc.sparx.bluealliance.events.MatchScore;
 import frc.sparx.bluealliance.events.UpcomingMatch;
-import frc.sparx.services.SlackService;
 import frc.sparx.services.TriviaService;
 import frc.sparx.services.trivia.Trivia;
 
@@ -34,6 +33,7 @@ public class BlueAllianceHook {
 	public String newEvent(@RequestBody String payload) throws JsonMappingException, JsonProcessingException {
 		BaseEvent event = mapper.readValue(payload, BaseEvent.class);
 		System.out.println("New Event: " + event.getMessage_type());
+		System.out.println(payload);
 		if("upcoming_match".equals(event.getMessage_type())) {
 			newUpcomingMatchEvent(mapper.readValue(payload, new TypeReference<Event<UpcomingMatch>>(){}));
 		}else if("match_score".equals(event.getMessage_type())) {
