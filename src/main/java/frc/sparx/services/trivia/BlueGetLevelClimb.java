@@ -11,8 +11,18 @@ public class BlueGetLevelClimb extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getBlue().getEndgameRungIsLevel().equalsIgnoreCase("Leveled");
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yes, switch is level";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "No, switch is not level";
 	}
 
 }

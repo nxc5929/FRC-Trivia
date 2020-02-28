@@ -11,8 +11,20 @@ public class TwentyFivePenaltyPoints extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().getFoulPoints() + score.getBlue().getFoulPoints() >= 25;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		int foulPoints = score.getRed().getFoulPoints() + score.getBlue().getFoulPoints();
+		return "True, there were " + foulPoints + "points worth of penalties that match =(";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		int foulPoints = score.getRed().getFoulPoints() + score.getBlue().getFoulPoints();
+		return "Nope, there were only " + foulPoints + "points worth of penalties";
 	}
 
 }

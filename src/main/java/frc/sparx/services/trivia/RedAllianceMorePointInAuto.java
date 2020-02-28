@@ -11,8 +11,18 @@ public class RedAllianceMorePointInAuto extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().getAutoPoints() > score.getBlue().getAutoPoints();
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yep, RED alliance got more AUTO points then BLUE ("+score.getRed().getAutoPoints() +">"+ score.getBlue().getAutoPoints()+")";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Nope, RED alliance got less AUTO points then BLUE ("+score.getRed().getAutoPoints() +"<"+ score.getBlue().getAutoPoints()+")";
 	}
 
 }

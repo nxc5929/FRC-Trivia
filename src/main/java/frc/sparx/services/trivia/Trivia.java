@@ -6,7 +6,16 @@ import frc.sparx.bluealliance.events.UpcomingMatch;
 public abstract class Trivia {
 	
 	public abstract String getQuestion(UpcomingMatch upcomingMatch);
-	public abstract boolean getResult(ScoreBreakdown score);
+	public abstract boolean getBooleanResult(ScoreBreakdown score);
+	public abstract String getCorrectResponse(ScoreBreakdown score);
+	public abstract String getIncorrectResponse(ScoreBreakdown score);
+	
+	public TriviaResponse getResult(ScoreBreakdown score) {
+		if(getBooleanResult(score)) {
+			return new TriviaResponse(true, getCorrectResponse(score));
+		}
+		return new TriviaResponse(false, getIncorrectResponse(score));
+	}
 	
 	public String getBlueAlliance(UpcomingMatch upcomingMatch) {
 		return getAlliance(upcomingMatch.getBlueTeams());

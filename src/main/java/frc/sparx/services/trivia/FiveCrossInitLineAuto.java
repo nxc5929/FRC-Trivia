@@ -11,7 +11,23 @@ public class FiveCrossInitLineAuto extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
+		return getRobotsCrossed(score) >= 5;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		int crossed = getRobotsCrossed(score);
+		return "Sure did! " + crossed + "/6 robots crossed the line";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		int crossed = getRobotsCrossed(score);
+		return "Nope, only " + crossed + "/6 robots crossed the line";
+	}
+	
+	private int getRobotsCrossed(ScoreBreakdown score) {
 		String crossedStr = "";
 		int crossed = 0;;
 		if(score.getBlue().getInitLineRobot1().equalsIgnoreCase(crossedStr)) {
@@ -32,7 +48,7 @@ public class FiveCrossInitLineAuto extends Trivia{
 		if(score.getRed().getInitLineRobot3().equalsIgnoreCase(crossedStr)) {
 			crossed++;
 		}
-		return crossed >= 5;
+		return crossed;
 	}
 	
 

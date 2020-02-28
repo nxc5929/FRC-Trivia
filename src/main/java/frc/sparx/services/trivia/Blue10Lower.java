@@ -11,8 +11,19 @@ public class Blue10Lower extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
-		return score.getBlue().getAutoCellsBottom() + score.getBlue().getTeleopCellsBottom() >= 10;
+	public boolean getBooleanResult(ScoreBreakdown score) {
+		int cellsLow = score.getBlue().getAutoCellsBottom() + score.getBlue().getTeleopCellsBottom();
+		return cellsLow >= 10;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yep, BLUE scored " + score.getBlue().getAutoCellsBottom() + score.getBlue().getTeleopCellsBottom() + " cells into the lower goal";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Nope, BLUE only scored " + score.getBlue().getAutoCellsBottom() + score.getBlue().getTeleopCellsBottom() + " cells into the lower goal";
 	}
 
 }

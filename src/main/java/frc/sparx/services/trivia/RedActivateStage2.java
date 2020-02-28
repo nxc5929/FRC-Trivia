@@ -11,8 +11,18 @@ public class RedActivateStage2 extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().isStage2Activated();
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "With ease, RED activates stage 2";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Maybe next time, RED doesn't activates stage 2";
 	}
 
 }

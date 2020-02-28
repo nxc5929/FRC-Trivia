@@ -11,10 +11,20 @@ public class BlueRobot1WillCrossAndHang extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		String crossStr = "";
 		String hangStr = "";
 		return score.getBlue().getInitLineRobot1().equalsIgnoreCase(crossStr) && score.getBlue().getEndgameRobot1().equalsIgnoreCase(hangStr);
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yes, team crossed the initiation line and climbed without an issue!!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Nope, better luck next time!";
 	}
 
 }

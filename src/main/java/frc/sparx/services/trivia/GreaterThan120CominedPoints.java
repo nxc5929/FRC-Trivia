@@ -11,8 +11,20 @@ public class GreaterThan120CominedPoints extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().getTotalPoints() + score.getBlue().getTotalPoints() >= 120;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		int total = score.getRed().getTotalPoints() + score.getBlue().getTotalPoints();
+		return "Big Scoreing Match! " + total + " total points!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		int total = score.getRed().getTotalPoints() + score.getBlue().getTotalPoints();
+		return "Close, but no. Only " + total + " total points";
 	}
 
 }

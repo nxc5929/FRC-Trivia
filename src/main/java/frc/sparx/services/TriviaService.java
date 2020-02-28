@@ -1,5 +1,6 @@
 package frc.sparx.services;
 
+import java.lang.module.FindException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,7 @@ import frc.sparx.services.trivia.RedRobot2WillNotCrossButHang;
 import frc.sparx.services.trivia.RedTechnicalFoul;
 import frc.sparx.services.trivia.RedWinningTeam;
 import frc.sparx.services.trivia.Trivia;
+import frc.sparx.services.trivia.TriviaResponse;
 import frc.sparx.services.trivia.TwentyBallIntoOuter;
 import frc.sparx.services.trivia.TwentyFivePenaltyPoints;
 import frc.sparx.services.trivia.TwoRobotClimb;
@@ -68,10 +70,22 @@ public class TriviaService {
 	}
 
 	public void postQuestion(MatchScore match) {
-		String previousMatchKey = match.getEvent_key() + "_" + match.getMatch().getComp_level() + (match.getMatch().getMatch_number()+1);
-		TriviaQuestion question = triviaRepo.findQuestionByMatchKey(previousMatchKey);
+		//Post results if available
+		String matchKey = match.getMatch().getComp_level() + match.getMatch().getMatch_number();
+		String currentMathKey = match.getEvent_key() + "_" + matchKey;
+		TriviaQuestion question = triviaRepo.findQuestionByMatchKey(currentMathKey);
+		if(question != null && question.getTimestamp() == null && match.getMatch().getScore_breakdown() != null) {
+			Trivia triviaQuestion = getTrivia(question.getTriviaNumber());
+			TriviaResponse result = triviaQuestion.getResult(match.getMatch().getScore_breakdown());
+			slack.sendMessage(matchKey + " RESULT: " + result.getMessage());
+		}else {
+			System.out.println("No Score Data");
+		}
+		
+		String nextMatchKey = match.getEvent_key() + "_" + match.getMatch().getComp_level() + (match.getMatch().getMatch_number()+1);
+		question = triviaRepo.findQuestionByMatchKey(nextMatchKey);
 		if(question != null && question.getTimestamp() == null) {
-			String timestamp = slack.sendMessage(question.getTriviaQuestion());
+			String timestamp = slack.sendNewTriviaQuestion(question.getTriviaQuestion());
 			question.setTimestamp(timestamp);
 			triviaRepo.save(question);
 		}else {
@@ -86,7 +100,7 @@ public class TriviaService {
 				Match matchResult = blueAllianceService.getDetailedMatch(question.getMatch_key());
 				Reaction[] reactions = slack.getReactions(question.getTimestamp());
 				Trivia trivaAnswer = getTrivia(question.getTriviaNumber());
-				boolean correct = trivaAnswer.getResult(matchResult.getScore_breakdown());
+				boolean correct = trivaAnswer.getBooleanResult(matchResult.getScore_breakdown());
 				addWinningUsers(correctUsers, getCorrectUsers(correct, reactions));
 			}
 		}

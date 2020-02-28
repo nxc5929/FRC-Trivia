@@ -11,8 +11,20 @@ public class Red6IntoOuter extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return (score.getRed().getAutoCellsOuter() + score.getRed().getTeleopCellsOuter()) >= 6;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		int outer = score.getRed().getAutoCellsOuter() + score.getRed().getTeleopCellsOuter();
+		return "Sure did! RED scored " + outer + " power cells into the outer goal!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		int outer = score.getRed().getAutoCellsOuter() + score.getRed().getTeleopCellsOuter();
+		return "Nope, RED only scored " + outer + " power cells into the outer goal";
 	}
 
 }

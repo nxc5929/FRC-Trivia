@@ -11,10 +11,20 @@ public class RedRobot2WillNotCrossButHang extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		String crossStr = "";
 		String hangStr = "";
 		return !score.getRed().getInitLineRobot2().equalsIgnoreCase(crossStr) && score.getRed().getEndgameRobot2().equalsIgnoreCase(hangStr);
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yep, Robot didn't have a great auto but did make the climb!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Nope, better luck next time";
 	}
 
 }

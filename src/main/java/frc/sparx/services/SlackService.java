@@ -48,17 +48,21 @@ public class SlackService {
 	@Value("${slack.channel}")
 	private String channel;
 	
+	public String sendNewTriviaQuestion(String text) {
+		String ts = sendMessage(text);
+		addDefaultReactions(ts);
+		return ts;
+	}
+	
 	public String sendMessage(String text) {
 		SlackMessageRequest message = new SlackMessageRequest(channel, text);
 		HttpEntity<SlackMessageRequest> request = new HttpEntity<SlackMessageRequest>(message, getHeaders());
 		
 		ResponseEntity<PostedMessageResponse> response = http.postForEntity(postURL, request, PostedMessageResponse.class);
-		String ts = response.getBody().getTs();
-		addDefaultReactions(ts);
-		return ts;
+		return response.getBody().getTs();
 	}
 	
-	public void addDefaultReactions(String ts) {
+	private void addDefaultReactions(String ts) {
 		SlackAddReaction message = new SlackAddReaction(channel, "thumbsup", ts);
 		HttpEntity<SlackAddReaction> request = new HttpEntity<SlackAddReaction>(message, getHeaders());
 		http.postForEntity(addReactionsURL, request, String.class);

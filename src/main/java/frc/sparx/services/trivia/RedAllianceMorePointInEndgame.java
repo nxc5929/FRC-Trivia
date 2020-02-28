@@ -11,8 +11,18 @@ public class RedAllianceMorePointInEndgame extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().getEndgamePoints() > score.getBlue().getEndgamePoints();
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yep, RED alliance got more ENDGAME points then BLUE ("+score.getRed().getEndgamePoints() +">"+ score.getBlue().getEndgamePoints()+")";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Nope, RED alliance got less ENDGAME points then BLUE ("+score.getRed().getEndgamePoints() +"<"+ score.getBlue().getEndgamePoints()+")";
 	}
 
 }

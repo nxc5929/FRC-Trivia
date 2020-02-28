@@ -11,8 +11,18 @@ public class RedWinningTeam extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().getTotalPoints() > score.getBlue().getTotalPoints();
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "True, RED beat BLUE ("+score.getRed().getTotalPoints()+ " to " + score.getBlue().getTotalPoints() + ")";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "False, RED lost to BLUE ("+score.getRed().getTotalPoints()+ " to " + score.getBlue().getTotalPoints() + ")";
 	}
 	
 	

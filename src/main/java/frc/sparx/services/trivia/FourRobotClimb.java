@@ -11,7 +11,23 @@ public class FourRobotClimb extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
+		return getClimbCount(score) >= 4;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		int climbCount = getClimbCount(score);
+		return "Yep, " + climbCount + "/6 robots climbed!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		int climbCount = getClimbCount(score);
+		return "Nope, only " + climbCount + "/6 robots climbed";
+	}
+	
+	private int getClimbCount(ScoreBreakdown score) {
 		String climbStr = "";
 		int climbCount = 0;
 		if(score.getRed().getEndgameRobot1().equalsIgnoreCase(climbStr)) {
@@ -32,7 +48,7 @@ public class FourRobotClimb extends Trivia{
 		if(score.getBlue().getEndgameRobot3().equalsIgnoreCase(climbStr)) {
 			climbCount++;
 		}
-		return climbCount >= 4;
+		return climbCount;
 	}
 
 }

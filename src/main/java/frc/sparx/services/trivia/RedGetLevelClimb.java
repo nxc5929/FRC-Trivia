@@ -11,8 +11,18 @@ public class RedGetLevelClimb extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return score.getRed().getEndgameRungIsLevel().equalsIgnoreCase("Leveled");
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "RED got the level climb with ease!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "No Level for RED";
 	}
 
 }

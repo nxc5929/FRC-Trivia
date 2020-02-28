@@ -11,10 +11,20 @@ public class BlueRobot3WillCrossAndPark extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		String crossStr = "";
 		String parkStr = "";
 		return score.getBlue().getInitLineRobot3().equalsIgnoreCase(crossStr) && score.getBlue().getEndgameRobot1().equalsIgnoreCase(parkStr);
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Yes, team crossed the initiation line and parked without an issue!!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "Nope, not exactly";
 	}
 
 }

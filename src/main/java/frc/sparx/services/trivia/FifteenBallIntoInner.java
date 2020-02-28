@@ -11,8 +11,20 @@ public class FifteenBallIntoInner extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
+	public boolean getBooleanResult(ScoreBreakdown score) {
 		return (score.getRed().getAutoCellsInner() + score.getRed().getTeleopCellsInner() + score.getBlue().getAutoCellsInner() + score.getBlue().getTeleopCellsInner()) >= 15;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		int ballCount = score.getRed().getAutoCellsInner() + score.getRed().getTeleopCellsInner() + score.getBlue().getAutoCellsInner() + score.getBlue().getTeleopCellsInner();
+		return "Balls where flying! " + ballCount + " power cells made it into the inner goal!!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		int ballCount = score.getRed().getAutoCellsInner() + score.getRed().getTeleopCellsInner() + score.getBlue().getAutoCellsInner() + score.getBlue().getTeleopCellsInner();
+		return "Not this time, only " + ballCount + " power cells made it into the inner goal";
 	}
 
 }

@@ -11,8 +11,19 @@ public class BlueGet3OrMoreRP extends Trivia{
 	}
 
 	@Override
-	public boolean getResult(ScoreBreakdown score) {
-		return score.getBlue().getRp() >= 3;
+	public boolean getBooleanResult(ScoreBreakdown score) {
+		int rankingPoints = score.getBlue().getRp();
+		return rankingPoints >= 3;
+	}
+
+	@Override
+	public String getCorrectResponse(ScoreBreakdown score) {
+		return "Correct, Blue got " + score.getBlue().getRp() + " ranking point!";
+	}
+
+	@Override
+	public String getIncorrectResponse(ScoreBreakdown score) {
+		return "inCorrect, Blue only got " + score.getBlue().getRp() + " ranking point";
 	}
 
 }
