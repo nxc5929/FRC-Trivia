@@ -54,8 +54,8 @@ public class BlueAllianceHook {
 	}
 	
 	@GetMapping(value = "/winners")
-	public Map<String, Integer> displayWinners() {
-		return triviaService.checkwinners();
+	public String displayWinners() {
+		return triviaService.sendCurrentStandings();
 	}
 
 }

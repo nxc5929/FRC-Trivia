@@ -2,6 +2,9 @@ package frc.sparx.services;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,12 +91,24 @@ public class TriviaService {
 			question.setTimestamp(timestamp);
 			triviaRepo.save(question);
 		}else {
-			System.out.println("Unable to find previous match");
+			System.out.println("Unable to find Next match");
 		}
+	}
+	
+	public String sendCurrentStandings() {
+		Map<String, Integer> standings = checkwinners();
+		int rounds = standings.remove("frctrivia");
+		String resultStr = "Current Leaders: \n";
+		for(Entry<String, Integer> player : standings.entrySet()) {
+			resultStr += player.getKey() + ": " + player.getValue()  + " (" + player.getValue()/(double)rounds + "% Correct)\n";
+		}
+		slack.sendMessage(resultStr);
+		return resultStr;
+		
 	}
 
 	public Map<String, Integer> checkwinners() {
-		Map<String, Integer> correctUsers = new HashMap<String, Integer>();
+		Map<String, Integer> correctUsers = new TreeMap<String, Integer>();
 		for(TriviaQuestion question: triviaRepo.findAll()){
 			if(question.getTimestamp() != null) {
 				Match matchResult = blueAllianceService.getDetailedMatch(question.getMatch_key());
