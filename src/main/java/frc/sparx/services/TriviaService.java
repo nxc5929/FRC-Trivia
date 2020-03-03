@@ -1,5 +1,6 @@
 package frc.sparx.services;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -96,11 +97,12 @@ public class TriviaService {
 	}
 	
 	public String sendCurrentStandings() {
+		DecimalFormat df = new DecimalFormat("###.##");
 		Map<String, Integer> standings = checkwinners();
 		int rounds = standings.remove("frctrivia");
 		String resultStr = "Current Leaders: \n";
 		for(Entry<String, Integer> player : standings.entrySet()) {
-			resultStr += player.getKey() + ": " + player.getValue()  + " (" + player.getValue()/(double)rounds + "% Correct)\n";
+			resultStr += player.getKey() + ": " + player.getValue()  + " (" + df.format(player.getValue()/(double)rounds) + "% Correct)\n";
 		}
 		slack.sendMessage(resultStr);
 		return resultStr;
