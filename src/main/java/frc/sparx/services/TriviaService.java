@@ -102,7 +102,7 @@ public class TriviaService {
 		int rounds = standings.remove("frctrivia");
 		String resultStr = "Current Leaders: \n";
 		for(Entry<String, Integer> player : standings.entrySet()) {
-			resultStr += player.getKey() + ": " + player.getValue()  + " (" + df.format(player.getValue()/(double)rounds) + "% Correct)\n";
+			resultStr += player.getKey() + ": " + player.getValue()  + " (" + df.format((player.getValue()/(double)rounds) * 100) + "% Correct)\n";
 		}
 		slack.sendMessage(resultStr);
 		return resultStr;
