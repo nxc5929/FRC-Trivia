@@ -12,8 +12,8 @@ public class BlueRobot3WillCrossAndPark extends Trivia{
 
 	@Override
 	public boolean getBooleanResult(ScoreBreakdown score) {
-		String crossStr = "";
-		String parkStr = "";
+		String crossStr = Constants.EXITED_INIT_LINE;
+		String parkStr = Constants.PARKED;
 		return score.getBlue().getInitLineRobot3().equalsIgnoreCase(crossStr) && score.getBlue().getEndgameRobot1().equalsIgnoreCase(parkStr);
 	}
 

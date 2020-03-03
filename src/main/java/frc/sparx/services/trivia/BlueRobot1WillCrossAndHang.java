@@ -12,8 +12,8 @@ public class BlueRobot1WillCrossAndHang extends Trivia{
 
 	@Override
 	public boolean getBooleanResult(ScoreBreakdown score) {
-		String crossStr = "";
-		String hangStr = "";
+		String crossStr = Constants.EXITED_INIT_LINE;
+		String hangStr = Constants.CLIMBED;
 		return score.getBlue().getInitLineRobot1().equalsIgnoreCase(crossStr) && score.getBlue().getEndgameRobot1().equalsIgnoreCase(hangStr);
 	}
 

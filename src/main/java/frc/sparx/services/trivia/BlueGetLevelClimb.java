@@ -12,7 +12,7 @@ public class BlueGetLevelClimb extends Trivia{
 
 	@Override
 	public boolean getBooleanResult(ScoreBreakdown score) {
-		return score.getBlue().getEndgameRungIsLevel().equalsIgnoreCase("Leveled");
+		return score.getBlue().getEndgameRungIsLevel().equalsIgnoreCase(Constants.BAR_LEVELED);
 	}
 
 	@Override

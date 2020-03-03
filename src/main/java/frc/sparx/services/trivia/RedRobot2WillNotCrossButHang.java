@@ -12,9 +12,9 @@ public class RedRobot2WillNotCrossButHang extends Trivia{
 
 	@Override
 	public boolean getBooleanResult(ScoreBreakdown score) {
-		String crossStr = "";
-		String hangStr = "";
-		return !score.getRed().getInitLineRobot2().equalsIgnoreCase(crossStr) && score.getRed().getEndgameRobot2().equalsIgnoreCase(hangStr);
+		String notCrossStr = Constants.STAYED_INIT_LINE;
+		String hangStr = Constants.CLIMBED;
+		return score.getRed().getInitLineRobot2().equalsIgnoreCase(notCrossStr) && score.getRed().getEndgameRobot2().equalsIgnoreCase(hangStr);
 	}
 
 	@Override

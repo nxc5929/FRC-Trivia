@@ -12,7 +12,7 @@ public class BlueAllCrossInitLineAuto extends Trivia{
 
 	@Override
 	public boolean getBooleanResult(ScoreBreakdown score) {
-		String crossedStr = "";
+		String crossedStr = Constants.EXITED_INIT_LINE;
 		return score.getBlue().getInitLineRobot1().equalsIgnoreCase(crossedStr) && 
 				score.getBlue().getInitLineRobot2().equalsIgnoreCase(crossedStr) &&
 				score.getBlue().getInitLineRobot3().equalsIgnoreCase(crossedStr);

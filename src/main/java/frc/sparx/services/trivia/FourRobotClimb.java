@@ -28,7 +28,7 @@ public class FourRobotClimb extends Trivia{
 	}
 	
 	private int getClimbCount(ScoreBreakdown score) {
-		String climbStr = "";
+		String climbStr = Constants.CLIMBED;
 		int climbCount = 0;
 		if(score.getRed().getEndgameRobot1().equalsIgnoreCase(climbStr)) {
 			climbCount++;
