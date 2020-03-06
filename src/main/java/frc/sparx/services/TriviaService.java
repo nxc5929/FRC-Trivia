@@ -84,7 +84,7 @@ public class TriviaService {
 		}else {
 			System.out.println("No Score Data");
 		}
-		
+
 		String nextMatchKey = match.getEvent_key() + "_" + match.getMatch().getComp_level() + (match.getMatch().getMatch_number()+1);
 		question = triviaRepo.findQuestionByMatchKey(nextMatchKey);
 		if(question != null && question.getTimestamp() == null) {
@@ -95,7 +95,7 @@ public class TriviaService {
 			System.out.println("Unable to find Next match");
 		}
 	}
-	
+
 	public String sendCurrentStandings() {
 		DecimalFormat df = new DecimalFormat("###.##");
 		Map<String, Integer> standings = checkwinners();
@@ -106,7 +106,7 @@ public class TriviaService {
 		}
 		slack.sendMessage(resultStr);
 		return resultStr;
-		
+
 	}
 
 	public Map<String, Integer> checkwinners() {
@@ -114,10 +114,12 @@ public class TriviaService {
 		for(TriviaQuestion question: triviaRepo.findAll()){
 			if(question.getTimestamp() != null) {
 				Match matchResult = blueAllianceService.getDetailedMatch(question.getMatch_key());
-				Reaction[] reactions = slack.getReactions(question.getTimestamp());
-				Trivia trivaAnswer = getTrivia(question.getTriviaNumber());
-				boolean correct = trivaAnswer.getBooleanResult(matchResult.getScore_breakdown());
-				addWinningUsers(correctUsers, getCorrectUsers(correct, reactions));
+				if(matchResult.getScore_breakdown() != null) {
+					Reaction[] reactions = slack.getReactions(question.getTimestamp());
+					Trivia trivaAnswer = getTrivia(question.getTriviaNumber());
+					boolean correct = trivaAnswer.getBooleanResult(matchResult.getScore_breakdown());
+					addWinningUsers(correctUsers, getCorrectUsers(correct, reactions));
+				}
 			}
 		}
 		return userIdToName(correctUsers);
